@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.samarth_dubey.Movies"
     },
     "web": {
       "favicon": "./assets/favicon.png"
