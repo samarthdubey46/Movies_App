@@ -6,6 +6,7 @@ import { Context, dark_style, HEIGHT, light_style, MarginTop, WIDTH } from '../.
 import { FormatDate, FormatPopularity, GetTheme } from '../../utilities/helpers';
 import { backDropImage } from '../../utilities/urls';
 import { MaterialCommunityIcons, AntDesign, Ionicons, Feather, Entypo } from '@expo/vector-icons';
+import { removeValue, storeData } from '../../utilities/AsyncStorage_func';
 // create a component
 
 const SingleMovie = ({ navigation, route }) => {
