@@ -3,6 +3,7 @@ import { View, Button, Text, Animated, Pressable, FlatList, TextInput, Image, Ac
 import { Context, dark_style, light_style, MarginTop, WIDTH } from '../../state'
 import { GetTheme } from '../../utilities/helpers'
 import { EvilIcons, Entypo, MaterialIcons, Feather } from '@expo/vector-icons';
+import { removeValue, storeData } from '../../utilities/AsyncStorage_func';
 
 
 const RenderHeader = ({ Search, changeSearchFoucsed, changeSearch, SearchFocused }) => {
@@ -28,7 +29,15 @@ const RenderHeader = ({ Search, changeSearchFoucsed, changeSearch, SearchFocused
                 {String(Search).length > 0 && (<MaterialIcons onPress={() => changeSearch('')} name="cancel" size={24} style={{ marginRight: 10 }} color="black" />)}
             </Animated.View>
             <View style={{marginTop:MarginTop}}>
-                {mainColor === 'black' ? <Feather onPress={() => changeTheme(light_style)} name="sunrise" size={24} color={text_color} /> : <Entypo onPress={() => changeTheme(dark_style   )} name="moon" size={24} color={text_color} />}
+                {mainColor === 'black' ? <Feather onPress={async () => {
+                    
+                    changeTheme(light_style)
+                    await removeValue('theme')
+                    }} name="sunrise" size={24} color={text_color} /> : <Entypo onPress={async () => {
+                        
+                        changeTheme(dark_style)
+                        await storeData('theme','dark')
+                        }} name="moon" size={24} color={text_color} />}
             </View>
         </View >
     )

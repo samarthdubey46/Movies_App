@@ -13,7 +13,7 @@ const SingleMovie = ({ navigation, route }) => {
 
     let state = useContext(Context)
     state = state[0]
-    const {Theme,changeTheme} = state
+    const { Theme, changeTheme } = state
     const { text_color, backgroundColor, borderColor, header, heading, subHeading, fontFamily, disabled_color, mainColor } = Theme
     return (
         <View style={{ flex: 1 }}>
@@ -23,9 +23,17 @@ const SingleMovie = ({ navigation, route }) => {
                     <Ionicons onPress={() => navigation.pop()} name="md-arrow-back" size={24} color={text_color} />
                     <Text style={{ color: text_color, fontSize: 18, marginLeft: 7, bottom: 1 }}>Back</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: MarginTop, justifyContent: 'center', alignItems: 'center',bottom:2 }}>
+                <View style={{ flexDirection: 'row', marginTop: MarginTop, justifyContent: 'center', alignItems: 'center', bottom: 2 }}>
 
-                    {mainColor === 'black' ? <Feather onPress={() => changeTheme(light_style)} name="sunrise" size={24} color={text_color} /> : <Entypo onPress={() => changeTheme(dark_style)} name="moon" size={24} color={text_color} />}
+                    {mainColor === 'black' ? <Feather onPress={async () => {
+
+                        changeTheme(light_style)
+                        await removeValue('theme')
+                    }} name="sunrise" size={24} color={text_color} /> : <Entypo onPress={ async () => {
+
+                        changeTheme(dark_style)
+                        await storeData('theme', 'dark')
+                    }} name="moon" size={24} color={text_color} />}
                 </View>
             </View>
             <View style={{ flex: .9 }}>

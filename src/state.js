@@ -2,6 +2,7 @@
 import React, { useState, createContext, useEffect } from 'react'
 import { Dimensions } from 'react-native';
 import Constants from 'expo-constants';
+import { getData, removeValue, storeData } from './utilities/AsyncStorage_func';
 
 export const dark_style = {
     text_color: 'white',
@@ -39,6 +40,17 @@ const ThemeProvider = (props) => {
 
     const [Theme, changeTheme] = useState(light_style)
 
+    useEffect(() => {
+        (async () => {
+            let theme = await getData('theme')
+            console.log(theme)
+            if(theme === null || theme === undefined ){
+                changeTheme(light_style)
+            }else{
+                changeTheme(dark_style)
+            }
+        })()
+    },[])
 
     return (
         <Context.Provider value={[{ Theme:Theme, changeTheme:changeTheme}]}>
